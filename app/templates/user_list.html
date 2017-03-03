@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block body %}
+
+  <h2 class="sub-header">Utilizadores</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Administrador</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.is_admin }}</td>
+          <td>
+            <a href="{{ url_for('user.edit_user', id=user.id) }}" class="btn btn-primary btn-xs">Abrir / Editar</a>
+          </td>
+          <td>
+            <a href="{{ url_for('user.delete_user', id=user.id) }}" class="btn btn-danger btn-xs">Remover</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{{ url_for('user.add_user') }}" class="btn btn-success">Adicionar Utilizador</a>
+
+{% endblock %}

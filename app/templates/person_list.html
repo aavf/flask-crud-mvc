@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body %}
+
+{% if current_user.is_authenticated %}
+
+  <h2 class="sub-header">Pessoas</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Apelido</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for person in persons %}
+        <tr>
+          <td>{{ person.id }}</td>
+          <td>{{ person.first_name }}</td>
+          <td>{{ person.last_name }}</td>
+          <td>
+            <a href="{{ url_for('person.edit_person', id=person.id) }}" class="btn btn-primary btn-xs">Abrir / Editar</a>
+          </td>
+          <td>
+            <a href="{{ url_for('person.delete_person', id=person.id) }}" class="btn btn-danger btn-xs">Remover</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <a href="{{ url_for('person.add_person') }}" class="btn btn-success">Adicionar Pessoa</a>
+
+{% else %}
+
+{% include 'login_form.html' %}
+
+{% endif %}
+
+{% endblock %}

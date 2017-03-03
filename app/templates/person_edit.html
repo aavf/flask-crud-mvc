@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block body %}
+
+  <h2 class="sub-header">Editar Pessoa</h2>
+
+<form action="{{ url_for('person.edit_person', id=person.id) }}" method="post">
+  <div class="form-group">
+    <label for="first_name">Nome *</label>
+    <input type="text" class="form-control" id="first_name" name="first_name" required value="{{ person.first_name }}">
+  </div>
+  <div class="form-group">
+    <label for="last_name">Apelido *</label>
+    <input type="text" class="form-control" id="last_name" name="last_name" required value="{{ person.last_name }}">
+  </div>
+  <div class="form-group">
+    <label for="birthdate">Data de nascimento</label>
+    <input type="date" class="form-control" id="birthdate" name="birthdate" value="{% if person.birthdate %}{{ person.birthdate.strftime('%Y-%m-%d') }}{% endif %}">
+  </div>
+  <div class="form-group">
+  <label>Sexo</label>
+  <select class="form-control" name="gender" id="gender" value="{{ person.gender }}">
+    <option select value="Feminino">Feminino</option>
+    <option value="Masculino">Masculino</option>
+    <option value="Outro">Outro</option>
+  </select>
+  </div>
+  <div class="form-group">
+    <label for="phone">Telefone</label>
+    <input type="text" class="form-control" id="phone" name="phone" value="{{ person.phone }}">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" value="{{ person.email }}">
+  </div>
+  <div class="form-group">
+    <label for="address">Morada</label>
+    <textarea class="form-control" id="address" name="address">{{ person.address }}</textarea>
+  </div>
+  <div class="form-group">
+    <label for="profession">Profissão</label>
+    <input type="text" class="form-control" id="profession" name="profession" value="{{ person.profession }}">
+  </div>
+  <div class="form-group">
+    <label>Sexo</label>
+    <select class="form-control" name="marital_status" id="marital_status" value="{{ person.marital_status }}">
+    <option value="Solteiro">Solteiro</option>
+    <option value="Casado">Casado</option>
+    <option value="Divorciado">Divorciado</option>
+    <option value="Viúvo">Viúvo</option>
+  </select>
+  </div>
+
+  <button type="submit" class="btn btn-success">Guardar</button>
+  <button onclick="goBack()" class="btn btn-default">Voltar</button>
+</form>
+{% endblock %}
+
+{% block script %}
+{% if person %}
+<script>
+  document.getElementById('gender').value = '{{ person.gender }}';
+  document.getElementById('marital_status').value = '{{ person.marital_status }}';
+</script>
+{% endif %}
+{% endblock %}
