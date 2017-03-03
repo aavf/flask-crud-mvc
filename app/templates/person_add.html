@@ -51,6 +51,6 @@
   </div>
 
   <button type="submit" class="btn btn-success">Guardar</button>
-  <button onclick="goBack()" class="btn btn-default">Cancelar</button>
+  <a href="{{ url_for('person.list_persons') }}" class="btn btn-default">Cancelar</a>
 </form>
 {% endblock %}
