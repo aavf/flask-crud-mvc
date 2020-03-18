@@ -1,3 +1,5 @@
+Basic CRUD, verifies existing username, action messsages
+
 ## Virtual enviroment
 ### Install and activate
 In a terminal, from project folder:
@@ -19,3 +21,13 @@ $ export FLASK_CONFIG=development
 $ export FLASK_APP=run.py
 $ flask run
 ```
+
+### test users
+Username: admin
+
+Password: admin
+
+
+Username: user
+
+Password: user
