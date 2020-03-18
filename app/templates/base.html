@@ -47,9 +47,10 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
           {% if current_user.is_authenticated %}
-            <li><a><i class="fa fa-user"></i> Bem vindo, {{ current_user.username }}</a></li>
+            <li><a><i class="fa fa-user"></i> Welcome, {{ current_user.username }}</a></li>
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
           {% else %}
+            <li><a href="{{ url_for('user.add_user') }}">Register</a></li>
             <li><a href="{{ url_for('auth.login') }}">Login</a></li>
           {% endif %}
           </ul>

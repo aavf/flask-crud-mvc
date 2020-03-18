@@ -25,13 +25,13 @@ def list_users():
     return render_template('user_list.html', users=results)
 
 
+#@login_required
 @user.route('/users/add', methods=['GET', 'POST'])
-@login_required
 def add_user():
     """
     load form page and add to the database
     """
-    check_admin()
+    #check_admin()
 
     # if form submit
     if request.method == 'POST':

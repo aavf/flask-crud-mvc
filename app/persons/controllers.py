@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from flask import flash, redirect, render_template, url_for, request
 from flask_login import login_required
 
@@ -25,17 +27,20 @@ def add_person():
     """
     # if form submit
     if request.method == 'POST':
+        if request.form['birthdate']:
+            birthdate = datetime.strptime(request.form['birthdate'], "%Y-%m-%d")
+        else:
+            birthdate = None
         #  create new person with UI form data
         person = Person(first_name=request.form['first_name'],
                     last_name=request.form['last_name'],
-                    birthdate=request.form['birthdate'],
+                    birthdate=birthdate,
                     gender=request.form['gender'],
                     phone=request.form['phone'],
                     email=request.form['email'],
                     address=request.form['address'],
                     profession=request.form['profession'],
                     marital_status=request.form['marital_status'])
-
         try:
             # add person to the database
             db.session.add(person)
@@ -45,7 +50,7 @@ def add_person():
         except:
             # in case person name already exists
             flash('Erro: ocorreu um erro desconhecido.', 'danger')
-
+        
         # redirect to the persons list page
         return redirect(url_for('person.list_persons'))
 
@@ -60,10 +65,14 @@ def edit_person(id):
     person = Person.query.get_or_404(id)
 
     if request.method == 'POST':
+        if request.form['birthdate']:
+            birthdate = datetime.strptime(request.form['birthdate'], "%Y-%m-%d")
+        else:
+            birthdate = None
         # update person with UI form data
         person.first_name = request.form['first_name']
         person.last_name = request.form['last_name']
-        person.birthdate = request.form['birthdate']
+        person.birthdate = birthdate
         person.gender = request.form['gender']
         person.phone = request.form['phone']
         person.email = request.form['email']
